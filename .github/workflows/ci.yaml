@@ -15,3 +15,5 @@ permissions:
 jobs:
   lint:
      uses: ./.github/workflows/python_lint.yaml
+     with:
+      project_root: ${{ inputs.project_root }}
