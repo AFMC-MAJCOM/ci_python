@@ -10,4 +10,4 @@ permissions:
 
 jobs:
   lint:
-     uses: ./.github/workflows/python_lint.yml
+     uses: ./.github/workflows/python_lint.yaml
