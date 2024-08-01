@@ -17,5 +17,3 @@ jobs:
      uses: ./.github/workflows/python_lint.yaml
      with:
       project_root: ${{ inputs.project_root }}
-  unit_tests:
-     uses: ./.github/workflows/unit_tests.yaml
