@@ -1,4 +1,4 @@
-# This workflow will enfore code quality using pylint and ruff.
+# This workflow will enforce code quality using pylint and ruff.
 
 name: Python Lint
 
