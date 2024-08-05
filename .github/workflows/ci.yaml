@@ -1,4 +1,4 @@
-# Stating point for a generic python continuous integration pipeline.
+# Starting point for a generic python continuous integration pipeline.
 
 name: Python CI
 
