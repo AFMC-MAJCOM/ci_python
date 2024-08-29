@@ -12,7 +12,7 @@ jobs:
 ```
 
 ### Using composite ations with your repository workflow
-Composite actions can be called in steps of a job in your workflow. If your workflow is going to run pytests, you can use our pytest-setup action instead of setting it up on your own, as shown:
+Composite actions, found in subfolders in the .github/actions folder can be called in steps of a job in your workflow. If your workflow is going to run pytests, you can use our pytest-setup action instead of setting it up on your own, as shown:
 ```
 jobs:
   run-pytests:
