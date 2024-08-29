@@ -1,0 +1,19 @@
+# Starting point for a generic python continuous integration pipeline.
+
+name: Python CI
+
+on:
+  workflow_call:
+    inputs:
+     project_root:
+          required: true
+          type: string
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+     uses: ./.github/workflows/python_lint.yaml
+     with:
+      project_root: ${{ inputs.project_root }}
