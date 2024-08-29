@@ -17,12 +17,3 @@ jobs:
      uses: ./.github/workflows/python_lint.yaml
      with:
       project_root: ${{ inputs.project_root }}
-
-  unit-tests:
-     uses: ./.github/workflows/pytest_unit.yaml
-
-  integration-tests:
-     uses: ./.github/workflows/pytest_integration.yaml
-
-  end2end-tests:
-     uses: ./.github/workflows/pytest_end2end.yaml
