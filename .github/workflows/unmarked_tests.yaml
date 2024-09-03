@@ -14,7 +14,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Run pytest setup
-      uses: AFMC-MAJCOM/ci_python/.github/actions/pytest-setup@OPAL-668 #change this once it is merged into main
+      uses: AFMC-MAJCOM/ci_python/.github/actions/pytest-setup@main
     - name: Run pytest with collect-only and capture output
       id: collect_tests
       run: |
