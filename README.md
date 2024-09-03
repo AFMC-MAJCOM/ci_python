@@ -20,7 +20,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Run pytest setup
-      uses: AFMC-MAJCOM/ci_python/.github/actions/pytest-setup
+      uses: AFMC-MAJCOM/ci_python/.github/actions/pytest-setup@main
     - name: Run Pytests
       run: pytest -v
 ```
