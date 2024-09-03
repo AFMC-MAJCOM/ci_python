@@ -16,6 +16,10 @@ jobs:
 
       steps:
       - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
       # - name: Checkout root project repository
       #   uses: actions/checkout@v3
       #   with:
@@ -27,21 +31,19 @@ jobs:
       #     repository: AFMC-MAJCOM/ci_python
       #     path: ci_python
       #     ref: OPAL-756
-      - name: Run pytest setup
-        uses: AFMC-MAJCOM/ci_python/.github/actions/pytest-setup@main
-      - name: Run pytest with collect-only and capture output
+      # continue-on-error: true
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest-custom-exit-code
+          pip install .
+      - name: Capture pytest output
         id: collect_tests
         run: |
-          pytest_output=$(pytest -vv -m "not unit and not integration and not end2end" --collect-only)
-          ret=$?
-          if [ "$ret" = 5 ]; then
-            echo "No tests collected. Exiting with 0 (instead of 5)."
-            exit 0
-          fi
+          pytest_output=$(pytest --suppress-no-test-exit-code -vv -m "not unit and not integration and not end2end" --collect-only)
           echo "pytest_output<<EOF" >> $GITHUB_ENV
           echo "$pytest_output" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-          exit "$ret"
 
       - name: Count and check tests
         id: validate_test_marks
