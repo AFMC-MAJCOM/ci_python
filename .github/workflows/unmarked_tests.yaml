@@ -2,6 +2,10 @@ name: Unmarked Tests Checker
 
 on:
   workflow_call:
+    inputs:
+      project_root:
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -11,12 +15,23 @@ jobs:
       runs-on: ubuntu-latest
 
       steps:
-      - uses: actions/checkout@v3
+      - name: Checkout task_queue repository
+        uses: actions/checkout@v3
+        with:
+          path: ${{ inputs.project_root }}
+
+      - name: Checkout ci_python repository
+        uses: actions/checkout@v3
+        with:
+          repository: AFMC-MAJCOM/ci_python
+          path: ci_python
+          ref: OPAL-756
       - name: Run pytest setup
         uses: AFMC-MAJCOM/ci_python/.github/actions/pytest-setup@main
       - name: Run pytest with collect-only and capture output
         id: collect_tests
         run: |
+          cd ${{ inputs.project_root }}
           pytest_output=$(pytest -vv -m "not unit and not integration and not end2end" --collect-only)
           echo "pytest_output<<EOF" >> $GITHUB_ENV
           echo "$pytest_output" >> $GITHUB_ENV
@@ -24,6 +39,6 @@ jobs:
       - name: Count and check tests
         id: validate_test_marks
         run: |
-          python3 ./validate_test_marks.py
+          python3 ci_python/.github/workflows/validate_test_marks.py
         env:
           PYTHON_OUTPUT: ${{ env.pytest_output }}
