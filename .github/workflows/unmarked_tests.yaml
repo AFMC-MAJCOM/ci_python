@@ -36,6 +36,7 @@ jobs:
           echo "pytest_output<<EOF" >> $GITHUB_ENV
           echo "$pytest_output" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
+        continue-on-error: true
       - name: Count and check tests
         id: validate_test_marks
         run: |
