@@ -1,0 +1,28 @@
+name: Unmarked Tests Checker
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  pytest-linux:
+      runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Run pytest setup
+      uses: AFMC-MAJCOM/ci_python/.github/actions/pytest-setup@OPAL-668 #change this once it is merged into main
+    - name: Run pytest with collect-only and capture output
+      id: collect_tests
+      run: |
+        pytest_output=$(pytest -vv -m "not unit and not integration and not end2end" --collect-only)
+        echo "pytest_output=${pytest_output}" >> $GITHUB_ENV
+    - name: Count and check tests
+      id: validate_test_marks
+      run: |
+        python3 ./validate_test_marks.py
+      env:
+        PYTHON_OUTPUT: ${{ env.pytest_output }}
