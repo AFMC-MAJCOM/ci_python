@@ -44,7 +44,12 @@ jobs:
           echo "pytest_output<<EOF" >> $GITHUB_ENV
           echo "$pytest_output" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-
+      - name: Checkout ci_python repository
+        uses: actions/checkout@v3
+        with:
+          repository: AFMC-MAJCOM/ci_python
+          path: ci_python
+          ref: OPAL-756
       - name: Count and check tests
         id: validate_test_marks
         run: |
