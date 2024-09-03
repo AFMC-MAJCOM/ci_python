@@ -18,7 +18,9 @@ jobs:
         id: collect_tests
         run: |
           pytest_output=$(pytest -vv -m "not unit and not integration and not end2end" --collect-only)
-          echo "pytest_output=${pytest_output}" >> $GITHUB_ENV
+          echo "pytest_output<<EOF" >> $GITHUB_ENV
+          echo "$pytest_output" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
       - name: Count and check tests
         id: validate_test_marks
         run: |
