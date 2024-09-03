@@ -39,6 +39,6 @@ jobs:
       - name: Count and check tests
         id: validate_test_marks
         run: |
-          python3 /.github/workflows/validate_test_marks.py
+          python3 .github/workflows/validate_test_marks.py
         env:
           PYTHON_OUTPUT: ${{ env.pytest_output }}
