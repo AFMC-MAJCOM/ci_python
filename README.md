@@ -26,9 +26,11 @@ jobs:
 ```
 
 ### Using markings to label pytests
-Markings can be used to label pytests and control what tests the workflows run and in the order they run. Marking pytests must be done in the project directory these actions/workflows are being called from. There is a reusable workflow which enforces that all pytests in the project directory are correctly marked. The workflow expects tests to be marked with any of the following labels: "unit", "integration", and "end2end". If any tests are not marked with any of those three labels the workflow will cause the runner to fail. It can be called in your own workflow yaml file like so:
+Markings can be used to label pytests and control what tests the workflows run and in the order they run. Marking pytests must be done in the project directory these actions/workflows are being called from. There is a reusable workflow which enforces that all pytests in the project directory are correctly marked. The workflow expects a string containing the marks used for the tests in your directory. If any tests are not marked with the appropriate markings the workflow will cause the runner to fail. An example of how this can be used to check all tests are marked with "unit", "integration", or "end2end" markings can be seen below:
 ```
 jobs:
   unmarked-test:
     uses: AFMC-MAJCOM/ci_python/.github/workflows/unmarked_tests.yaml@main
+    with:
+      mark-inputs: not unit and not integration and not end2end
 ```
