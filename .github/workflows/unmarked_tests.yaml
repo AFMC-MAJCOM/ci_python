@@ -37,7 +37,7 @@ jobs:
         with:
           repository: AFMC-MAJCOM/ci_python
           path: ci_python
-          ref: OPAL-756
+          ref: main
       - name: Count and check tests
         id: validate_test_marks
         run: |
