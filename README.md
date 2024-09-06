@@ -11,7 +11,7 @@ jobs:
       project_root: <your_project>
 ```
 
-### Using composite ations with your repository workflow
+### Using composite actions with your repository workflow
 Composite actions, found in subfolders in the .github/actions folder can be called in steps of a job in your workflow. If your workflow is going to run pytests, you can use our pytest-setup action instead of setting it up on your own, as shown:
 ```
 jobs:
@@ -23,4 +23,14 @@ jobs:
       uses: AFMC-MAJCOM/ci_python/.github/actions/pytest-setup@main
     - name: Run Pytests
       run: pytest -v
+```
+
+### Using markings to label pytests
+Markings can be used to label pytests and control what tests the workflows run and in the order they run. Marking pytests must be done in the project directory these actions/workflows are being called from. There is a reusable workflow which enforces that all pytests in the project directory are correctly marked. The workflow expects a string containing the marks used for the tests in your directory. If any tests are not marked with the appropriate markings the workflow will cause the runner to fail. An example of how this can be used to check all tests are marked with "unit", "integration", or "end2end" markings can be seen below:
+```
+jobs:
+  unmarked-test:
+    uses: AFMC-MAJCOM/ci_python/.github/workflows/unmarked_tests.yaml@main
+    with:
+      mark-inputs: not unit and not integration and not end2end
 ```
