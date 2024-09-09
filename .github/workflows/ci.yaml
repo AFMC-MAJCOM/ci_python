@@ -8,6 +8,9 @@ on:
      project_root:
           required: true
           type: string
+     mark_inputs:
+          required: true
+          type: string
 
 permissions:
   contents: read
@@ -17,3 +20,7 @@ jobs:
      uses: ./.github/workflows/python_lint.yaml
      with:
       project_root: ${{ inputs.project_root }}
+  unmarked-test:
+    uses: ./.github/workflows/unmarked_tests.yaml
+    with:
+      mark_inputs: ${{ inputs.mark_inputs }}
