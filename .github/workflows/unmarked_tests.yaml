@@ -3,7 +3,7 @@ name: Unmarked Tests Checker
 on:
   workflow_call:
     inputs:
-      mark-inputs:
+      mark_inputs:
         required: true
         type: string
 
@@ -28,7 +28,7 @@ jobs:
       - name: Capture pytest output
         id: collect_tests
         run: |
-          pytest_output=$(pytest --suppress-no-test-exit-code -vv -m "${{ inputs.mark-inputs }}" --collect-only)
+          pytest_output=$(pytest --suppress-no-test-exit-code -vv -m "${{ inputs.mark_inputs }}" --collect-only)
           echo "pytest_output<<EOF" >> $GITHUB_ENV
           echo "$pytest_output" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
