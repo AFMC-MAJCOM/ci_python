@@ -17,5 +17,4 @@ runs:
       python -m pip install --upgrade pip
       pip install pytest
       pip install .${{  inputs.optional_dependencies  }}
-      echo .${{  inputs.optional_dependencies  }}
     shell: bash
