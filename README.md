@@ -2,13 +2,14 @@
 A generic continuous integration pipeline for python projects.
 
 ## Using a reusable workflow in your repository workflow
-Reusable workflows, found in the .github/workflows folder, can only be called directly in a job and not in steps. Below is an example of how you can use the ci.yaml reusable workflow in your own workflow yaml file.
+Reusable workflows, found in the .github/workflows folder, can only be called directly in a job and not in steps. Below is an example of how you can use the ci.yaml reusable workflow in your own workflow yaml file. There are two inputs required, the project_root which is just the root name of the project the workflow will be called in and then the mark_inputs. This is the marks used to label all your pytests and will check that all pytests are marked. For example if the projects pytests are labeled with unit, integration and end2end your mark_inputs string should look like this: "not unit and not integration and not end2end"
 ```
 jobs:
   generic-workflow:
     uses: AFMC-MAJCOM/ci_python/.github/workflows/ci.yaml@main
     with:
       project_root: <your_project>
+      mark_inputs: <your_marks>
 ```
 
 ### Using composite actions with your repository workflow
@@ -23,14 +24,4 @@ jobs:
       uses: AFMC-MAJCOM/ci_python/.github/actions/pytest-setup@main
     - name: Run Pytests
       run: pytest -v
-```
-
-### Using markings to label pytests
-Markings can be used to label pytests and control what tests the workflows run and in the order they run. Marking pytests must be done in the project directory these actions/workflows are being called from. There is a reusable workflow which enforces that all pytests in the project directory are correctly marked. The workflow expects a string containing the marks used for the tests in your directory. If any tests are not marked with the appropriate markings the workflow will cause the runner to fail. An example of how this can be used to check all tests are marked with "unit", "integration", or "end2end" markings can be seen below:
-```
-jobs:
-  unmarked-test:
-    uses: AFMC-MAJCOM/ci_python/.github/workflows/unmarked_tests.yaml@main
-    with:
-      mark-inputs: not unit and not integration and not end2end
 ```
