@@ -25,3 +25,14 @@ jobs:
     - name: Run Pytests
       run: pytest -v
 ```
+### Installing Optional Dependencies
+By default, these workflows will run `pip install .` for linting and pytest runners. If your repository has optional dependencies that need to be installed when running these tests, you will need to include them in the `optional_dependencies` input. For example, if you have the optional dependencies `api` and `tests`, you will use:
+```
+jobs:
+  generic-workflow:
+    uses: AFMC-MAJCOM/ci_python/.github/workflows/ci.yaml@main
+    with:
+      optional_dependencies: '[api,tests]'
+      ...
+```
+If your runners do not have optional dependencies, you do not need to use this input.
