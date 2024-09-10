@@ -11,7 +11,7 @@ on:
      mark_inputs:
           required: true
           type: string
-    optional_dependencies:
+     optional_dependencies:
           required: false
           type: string
           default: ''
