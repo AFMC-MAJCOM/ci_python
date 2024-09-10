@@ -24,6 +24,7 @@ jobs:
      uses: ./.github/workflows/python_lint.yaml
      with:
       project_root: ${{ inputs.project_root }}
+      optional_dependencies: ${{ inputs.optional_dependencies }}
   unmarked-test:
     uses: ./.github/workflows/unmarked_tests.yaml
     with:
