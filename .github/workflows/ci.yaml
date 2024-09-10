@@ -11,6 +11,10 @@ on:
      mark_inputs:
           required: true
           type: string
+     optional_dependencies:
+          required: false
+          type: string
+          default: ''
 
 permissions:
   contents: read
@@ -20,6 +24,7 @@ jobs:
      uses: ./.github/workflows/python_lint.yaml
      with:
       project_root: ${{ inputs.project_root }}
+      optional_dependencies: ${{ inputs.optional_dependencies }}
   unmarked-test:
     uses: ./.github/workflows/unmarked_tests.yaml
     with:
