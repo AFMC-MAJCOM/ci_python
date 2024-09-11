@@ -6,6 +6,10 @@ on:
       mark_inputs:
         required: true
         type: string
+      optional_dependencies:
+        required: false
+        type: string
+        default: ""
 
 permissions:
   contents: read
@@ -24,7 +28,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install pytest-custom-exit-code
-          pip install .
+          pip install .${{  inputs.optional_dependencies  }}
       - name: Capture pytest output
         id: collect_tests
         run: |
