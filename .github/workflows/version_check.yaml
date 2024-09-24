@@ -21,5 +21,11 @@ jobs:
       run: |
         echo "PROJECT_VERSION=$(python -c "import tomli; print(tomli.load(open('pyproject.toml', 'rb'))['project']['version'])")" >> $GITHUB_ENV
         echo "PROJECT_VERSION=${{ env.PROJECT_VERSION }}"
+    - name: Checkout ci_python repository
+        uses: actions/checkout@v3
+        with:
+          repository: AFMC-MAJCOM/ci_python
+          path: ci_python
+          ref: OPAL-943
     - name: Version Comparison
       run: python ci_python/.github/workflows/verify_version.py "${{ inputs.main_version }}" "${{ env.PROJECT_VERSION }}"
