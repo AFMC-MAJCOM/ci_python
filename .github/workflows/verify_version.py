@@ -16,6 +16,7 @@ def verify_version(old_vers: str, new_vers: str) -> bool:
     validity: bool
         Validity of the new version number.
     """
+    print("test")
     print(f"Old Version: {old_vers}")
     print(f"New Version: {new_vers}")
     old_vers = [int(v) for v in old_vers.split('.')]
