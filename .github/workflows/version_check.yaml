@@ -3,19 +3,20 @@ name: Version Check
 on:
   workflow_call:
     inputs:
-      project_root:
-        required: true
+      optional_dependencies:
+        required: false
         type: string
+        default: ""
 
 jobs:
   version_check:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
+    - name: Run pytest setup
+      uses: AFMC-MAJCOM/ci_python/.github/actions/pytest-setup@main
       with:
-        python-version: "3.10"
+        optional_dependencies: ${{ inputs.optional_dependencies  }}
     - name: Retrieve Project Version
       id: get_version
       run: |
