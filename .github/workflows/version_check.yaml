@@ -20,16 +20,17 @@ jobs:
       uses: AFMC-MAJCOM/ci_python/.github/actions/pytest-setup@main
       with:
         optional_dependencies: ${{ inputs.optional_dependencies  }}
-    - name: Main Version
-      run: echo "MAIN_VERSION=$(python -c "import tomli; print(tomli.load(open('pyproject.toml', 'rb'))['project']['version'])")" >> $GITHUB_ENV
+    - name: Retrieve Main Version
+      id: get_version
+      run: |
+        echo "PROJECT_VERSION=$(python -c "import tomli; print(tomli.load(open('pyproject.toml', 'rb'))['project']['version'])")" >> $GITHUB_ENV
+        echo "PROJECT_VERSION=${{ env.PROJECT_VERSION }}"
     - uses: actions/checkout@v3
-    - name: Merge Version
-      run: echo "MERGE_VERSION=$(python -c "import tomli; print(tomli.load(open('pyproject.toml', 'rb'))['project']['version'])")" >> $GITHUB_ENV
-    # - name: Retrieve Project Version
-    #   id: get_version
-    #   run: |
-    #     echo "PROJECT_VERSION=$(python -c "import tomli; print(tomli.load(open('pyproject.toml', 'rb'))['project']['version'])")" >> $GITHUB_ENV
-    #     echo "PROJECT_VERSION=${{ env.PROJECT_VERSION }}"
+    - name: Retrieve Main Version
+      id: get_version
+      run: |
+        echo "MERGE_VERSION=$(python -c "import tomli; print(tomli.load(open('pyproject.toml', 'rb'))['project']['version'])")" >> $GITHUB_ENV
+        echo "MERGE_VERSION=${{ env.MERGE_VERSION }}"
     - name: Checkout ci_python repository
       uses: actions/checkout@v3
       with:
@@ -37,4 +38,4 @@ jobs:
         path: ci_python
         ref: OPAL-943
     - name: Version Comparison
-      run: python ci_python/.github/workflows/verify_version.py "${{ inputs.main_version }}" "${{ env.PROJECT_VERSION }}"
+      run: python ci_python/.github/workflows/verify_version.py "${{ inputs.PROJECT_VERSION }}" "${{ env.MERGE_VERSION }}"
