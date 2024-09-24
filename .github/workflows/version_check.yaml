@@ -24,13 +24,11 @@ jobs:
       id: get_main
       run: |
         echo "PROJECT_VERSION=$(python -c "import tomli; print(tomli.load(open('pyproject.toml', 'rb'))['project']['version'])")" >> $GITHUB_ENV
-        echo "PROJECT_VERSION=${{ env.PROJECT_VERSION }}"
     - uses: actions/checkout@v3
     - name: Retrieve Branch Version
       id: get_branch
       run: |
         echo "MERGE_VERSION=$(python -c "import tomli; print(tomli.load(open('pyproject.toml', 'rb'))['project']['version'])")" >> $GITHUB_ENV
-        echo "MERGE_VERSION=${{ env.MERGE_VERSION }}"
     - name: Checkout ci_python repository
       uses: actions/checkout@v3
       with:
