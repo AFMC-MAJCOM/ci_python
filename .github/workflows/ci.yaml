@@ -20,6 +20,10 @@ permissions:
   contents: read
 
 jobs:
+  version_check:
+    uses: ./.github/workflows/version_check.yaml
+    with:
+      optional_dependencies: ${{ inputs.optional_dependencies }}
   lint:
      uses: ./.github/workflows/python_lint.yaml
      with:

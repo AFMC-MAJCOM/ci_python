@@ -35,7 +35,7 @@ jobs:
       with:
         python-version: "3.10"
     - name: Install pylint
-      run: python3.10 -m pip install pylint
+      run: python3.10 -m pip install pylint==3.2.7
     - name: Install Dependencies
       run: |
         python3.10 -m pip install .${{  inputs.optional_dependencies  }}
