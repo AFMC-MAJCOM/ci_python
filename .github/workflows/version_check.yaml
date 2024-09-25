@@ -37,6 +37,6 @@ jobs:
       with:
         repository: AFMC-MAJCOM/ci_python
         path: ci_python
-        ref: OPAL-943
+        ref: main
     - name: Version Comparison
       run: python ci_python/.github/workflows/verify_version.py "${{ env.MAIN_VERSION }}" "${{ env.MERGE_VERSION }}"
