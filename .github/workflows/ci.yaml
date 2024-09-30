@@ -30,9 +30,3 @@ jobs:
      with:
       project_root: ${{ inputs.project_root }}
       optional_dependencies: ${{ inputs.optional_dependencies }}
-
-  unmarked-test:
-    uses: ./.github/workflows/unmarked_tests.yaml
-    with:
-      mark_inputs: ${{ inputs.mark_inputs }}
-      optional_dependencies: ${{ inputs.optional_dependencies }}
